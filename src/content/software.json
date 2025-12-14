@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "icon": { "type": "lucide", "name": "code-xml" },
+    "title": "Programmation",
+    "softwares": [
+      {
+        "id": 1,
+        "icon": { "type": "simple-icons", "name": "jetbrains" },
+        "text": "IDEs JetBrains",
+        "link": "https://www.jetbrains.com/fr-fr/idea/"
+      },
+      {
+        "id": 2,
+        "icon": { "type": "simple-icons", "name": "git" },
+        "text": "Git",
+        "link": "https://git-scm.com/"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "icon": { "type": "lucide", "name": "palette" },
+    "title": "Graphisme",
+    "softwares": [
+      {
+      "id": 1,
+      "icon": { "type": "simple-icons", "name": "gimp" },
+      "text": "Gimp",
+      "link": "https://www.gimp.org/"
+    },
+      {
+        "id": 2,
+        "icon": { "type": "simple-icons", "name": "aseprite" },
+        "text": "LibreSprite",
+        "link": "https://git-scm.com/"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "icon": { "type": "lucide", "name": "ellipsis" },
+    "title": "Autre",
+    "softwares": [
+      {
+        "id": 1,
+        "icon": { "type": "simple-icons", "name": "archlinux" },
+        "text": "Arch Linux",
+        "link": "https://www.archlinux.org/"
+      },
+      {
+        "id": 2,
+        "icon": { "type": "simple-icons", "name": "kde" },
+        "text": "Kde DE",
+        "link": "https://kde.org/"
+      }
+    ]
+  }
+]

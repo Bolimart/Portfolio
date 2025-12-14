@@ -1,0 +1,167 @@
+.layout-grid-left, .layout-grid-right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 640px) {
+  .layout-grid-left, .layout-grid-right {
+    gap: 1rem;
+  }
+}
+
+.flex-col-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.header-container * {
+  margin: 0;
+}
+
+.prose {
+  line-height: 1.6;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #353535;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color .15s ease, border .15s ease;
+}
+
+.post-container:hover, .post-container:focus-visible {
+  background-color: rgba(140, 92, 245, .125);
+  border: 1px solid var(--primary);
+}
+
+.post-container:focus-visible {
+  outline: none;
+}
+
+.post-date, .work-experience-duration {
+  color: #c7c7c7;
+}
+
+.work-experience-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.work-experience-entry:not(:last-of-type) {
+  border-bottom: 1px solid #353535;
+  padding-bottom: 1rem;
+}
+
+.work-experience-duration {
+  font-size: .925rem;
+}
+
+.work-experience-company {
+  margin-top: .25rem;
+  margin-bottom: .5rem;
+}
+
+.work-experience-role {
+  margin-bottom: .75rem;
+}
+
+.socials-link {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  gap: .75rem;
+  align-items: center;
+}
+
+.prose img {
+  max-width: 100%;   /* Ne dépasse jamais le conteneur */
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Sur mobile uniquement : on force la pleine largeur */
+@media (max-width: 640px) {
+  .prose img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.software-link {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  gap: .75rem;
+  align-items: center;
+}
+
+.softwares-list {
+  /* espace entre le titre (summary) et la liste */
+  margin-top: 10px; /* ou padding-top si tu préfères */
+  padding-left: 22px;
+
+  /* dot list */
+  list-style: disc;
+}
+
+.softwares-list > li {
+  /* optionnel : un peu d’air entre les éléments */
+  margin: 6px 0;
+}
+
+
+/* Met le titre à gauche et la flèche tout à droite */
+.software-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Flèche par défaut (fermé) */
+summary.software-summary .software-chevron::before {
+  content: ">";
+}
+
+details > :not(summary) {
+  display: block;
+}
+
+details > .softwares-list {
+  overflow: hidden;
+  /* Pas de transition CSS ici, c'est le JS qui va piloter */
+}
+
+/* Optional: animate the chevron */
+.software-chevron {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+details[open] .software-chevron {
+  transform: rotate(90deg);
+}
+
+/* Respect user preference */
+@media (prefers-reduced-motion: reduce) {
+  details > .softwares-list,
+  .software-chevron {
+    transition: none;
+  }
+}

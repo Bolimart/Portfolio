@@ -1,0 +1,242 @@
+
+/* TITRE */
+
+.galery-title {
+    display: flex;
+    height: 50vh;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+    flex-direction: column;
+}
+
+.galery-title h1 {
+    font-size: 4rem;
+    margin: 0;
+}
+
+.galery-title p {
+    font-size: 1.25em;
+}
+
+.block-link {
+    margin-top: 1rem;
+}
+
+/* GALERIES */
+
+/* 1. Forcer la largeur totale en écrasant la grille du layout */
+/* On suppose que le container parent a la classe .layout-grid-left */
+.layout-grid-left:has(.galery-full-width) {
+    grid-column: 1 / -1 !important; /* Prend toute la largeur de la grille */
+    width: 100% !important;
+    max-width: 100% !important;
+    display: block !important; /* Casse le flex/grid interne s'il y en a */
+}
+
+/* Cache la colonne de droite inutile */
+.layout-grid-right:has(+ .galery-full-width), /* Si elle est avant */
+.layout-grid-left:has(.galery-full-width) + .layout-grid-right { /* Si elle est après */
+    display: none !important;
+}
+
+/* 2. Centrage du titre principal */
+.galery-title {
+    text-align: left;
+    margin: 3rem 0 5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.galery-title h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.block-link {
+    margin-top: 1rem;
+    opacity: 0.7;
+    font-size: 0.9rem;
+}
+
+/* 3. Style des sections (Titre + Carrousel) */
+.galeries-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem; /* Gros espace entre les galeries */
+    width: 100%;
+}
+
+.galery-wrapper {
+    width: 100%;
+    overflow: hidden; /* Pour gérer le débordement propre */
+}
+
+.galery-header-info {
+    padding: 0 2rem; /* Alignement texte */
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+}
+
+.title-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.title-row h2 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.desc {
+    color: #a1a1aa;
+    font-size: 1.1rem;
+    margin-left: 3.5rem; /* Aligné sous le texte du titre (pas l'icône) */
+}
+
+/* CAROUSEL */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+}
+
+/* On cible la Card avec une spécificité élevée */
+div.transparent-card,
+article.transparent-card,
+.transparent-card {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important; /* Force à sortir du conteneur si besoin */
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw !important; /* Technique du full-width breakout */
+    margin-right: -50vw !important;
+    padding-bottom: 60px !important;
+    );
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    width: 100%;
+
+    /* Cache scrollbar moche mais garde le scroll */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    padding-left: 10%; /* Espace initial pour voir le fade */
+    padding-right: 10%;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.carousel-img {
+    height: 400px; /* Grande hauteur */
+    width: auto; /* Largeur auto selon ratio */
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    max-width: 90vw;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 180px; /* Hauteur plus adaptée au mobile */
+    }
+}
+
+.carousel-img:hover {
+    transform: scale(1.02);
+}
+
+/* NAV BUTTONS */
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5); /* Fond sombre semi-transparent */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10; /* Au-dessus des images */
+    transition: all 0.2s ease;
+    backdrop-filter: blur(5px);
+}
+
+.nav-btn svg {
+    display: block;
+    width: 32px;                 /* Force la taille si besoin */
+    height: 32px;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Positionnement spécifique */
+.prev-btn {
+    left: 30px; /* Ajuste selon ton goût */
+}
+
+.prev-btn svg {
+    position: relative;
+    left: 4px;
+    top: 4px
+}
+
+.next-btn {
+    right: 30px;
+}
+
+.next-btn svg {
+    position: relative;
+    left: 5px;
+    top: 4px
+}
+
+/* Masquer les boutons sur mobile (tactile suffit) */
+@media (max-width: 768px) {
+    .nav-btn {
+        display: none;
+    }
+
+    .carousel-track {
+        /* Moins de padding sur mobile pour maximiser l'espace */
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}

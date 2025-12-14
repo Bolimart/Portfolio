@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Highlights",
+    "icon": {
+      "type": "lucide",
+      "name": "spotlight"
+    },
+    "description": "Voici quelques captures et rendus de mon travail.",
+    "id": 1,
+    "images": [
+      "/img/galerie/studdotio/studio-1.png",
+      "/img/galerie/studdotio/studio-2.png",
+      "/img/galerie/studdotio/studio-3.png",
+      "/img/galerie/studdotio/studio-4.png",
+      "/img/galerie/studdotio/studio-5.png",
+      "/img/galerie/studdotio/studio-6.png",
+      "/img/galerie/studdotio/studio-7.png",
+      "/img/galerie/studdotio/studio-8.png",
+      "/img/galerie/studdotio/studio-9.png",
+      "/img/galerie/studdotio/studio-10.png",
+      "/img/galerie/studdotio/studio-11.png",
+      "/img/galerie/studdotio/studio-12.png",
+      "/img/galerie/studdotio/studio-13.png"
+    ]
+  }
+]

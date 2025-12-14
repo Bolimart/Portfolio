@@ -1,0 +1,288 @@
+---
+import '../styles/index.css';
+import '../styles/project-card.css';
+import '../styles/galery.css'
+import { Image } from 'astro:assets';
+
+import ProfilePicture from '../assets/pfp.png';
+
+import Card from '../components/Card.astro';
+import Layout from '../layouts/Layout.astro';
+import ImageGlow from '../components/ImageGlow.astro';
+import Icon from '../components/Icon.astro';
+import { getCollection } from 'astro:content';
+import { getEntry } from 'astro:content';
+import { render } from 'astro:content';
+import { name, openGraph } from 'spectre:globals';
+
+const [projects, about, workExperience, quickInfo, socials, softwareGroup, highlights] = await Promise.all([
+	getCollection('projects'),
+	getEntry('other', 'about'),
+	getCollection('workExperience'),
+	getCollection('quickInfo'),
+	getCollection('socials'),
+	getCollection('softwaresGroup'),
+	getCollection('highlights')
+]);
+
+// biome-ignore lint/style/noNonNullAssertion: Should always be defined.
+const { Content: About } = await render(about!);
+---
+
+<Layout
+	title={openGraph.home.title || name}
+	description={openGraph.home.description}
+	pagefindIgnore
+>
+	<div class="layout-grid-left" slot="left">
+		<Card class="flex-col-card">
+			<ImageGlow quality={100} width={120} height={120} src={ProfilePicture} alt="Julien Fortineau" loading='eager' />
+			<h2>{name}</h2>
+			<ul class="overview-list">
+				{quickInfo.map((info) => (
+					<li>
+						<Icon type={info.data.icon.type} name={info.data.icon.name as any} width={24} height={24} class='glow-icon' />
+						<span>{info.data.text}</span>
+					</li>
+				))}
+			</ul>
+		</Card>
+		<Card>
+			<h3 class="no-mt">Réseaux</h3>
+			<ul class="overview-list">
+				{socials.map((item) => (
+					<li>
+						<a href={item.data.link} class="socials-link">
+							<Icon type={item.data.icon.type} name={item.data.icon.name as any} width={24} height={24} class='glow-icon' />
+							<span>{item.data.text}</span>
+						</a>
+					</li>
+				))}
+			</ul>
+		</Card>
+		<Card>
+			<h3 class="no-mt">Logiciels / Software</h3>
+			<ul class="overview-list">
+				{softwareGroup.map((group) => (
+					<li>
+						<details>
+							<summary class="socials-link software-summary">
+								<Icon type={group.data.icon.type} name={group.data.icon.name as any} width={24} height={24} class="glow-icon" />
+								<span class="software-title">{group.data.title}</span>
+								<span class="software-chevron" aria-hidden="true"></span>
+							</summary>
+
+							<ul class="overview-list softwares-list">
+								{group.data.softwares.length === 0 ? (
+									<li><span>Aucun logiciel pour le moment.</span></li>
+								) : (
+									group.data.softwares.map((sw) => (
+										<li>
+											{sw.link ? (
+												<a href={sw.link} class="socials-link">
+													<Icon type={sw.icon.type} name={sw.icon.name as any} width={24} height={24} class="glow-icon" />
+													<span>{sw.text}</span>
+												</a>
+											) : (
+												<span class="socials-link">
+										<Icon type={sw.icon.type} name={sw.icon.name as any} width={24} height={24} class="glow-icon" />
+										<span>{sw.text}</span>
+									</span>
+											)}
+										</li>
+									))
+								)}
+							</ul>
+						</details>
+					</li>
+				))}
+			</ul>
+		</Card>
+	</div>
+	<div class="layout-grid-right" slot="right">
+		<Card>
+			<div class="header-container">
+				<Icon type='lucide' name="user" width={24} height={24} class='glow-icon' />
+				<h2>A propos de moi</h2>
+			</div>
+			<div class="prose">
+				<About />
+			</div>
+		</Card>
+		<Card>
+			<div class="header-container">
+				<Icon type='lucide' name="folder-git" width={24} height={24} class='glow-icon' />
+				<h2>Projets</h2>
+			</div>
+			<div class="content-container">
+				{
+					projects
+						/* On s'assure que l'ID existe bien avant de trier */
+						.filter((p) => typeof p.data.id === 'number')
+						/* Tri croissant : petit ID (1) vers grand ID (10) */
+						.sort((a, b) => a.data.id - b.data.id)
+						.slice(0, 2)
+						.map((project) => (
+							<a href={`/projects/${project.id}`} class="post-container with-thumbnail">
+								<div class="post-content">
+									<div class="post-header">
+										<h3>{project.data.title}</h3>
+									</div>
+									<span>{project.data.description}</span>
+								</div>
+
+								{/* Image à droite */}
+								<div class="post-thumbnail">
+									<Image
+										src={project.data.image}
+										alt={project.data.title}
+										width={280}
+										class="project-thumb-img"
+									/>
+								</div>
+							</a>
+						))
+				}
+
+				{/* Message de debug si la liste est vide (à retirer plus tard) */}
+				{projects.length === 0 && <p>Aucun projet trouvé (vérifie le dossier src/content/projects)</p>}
+			</div>
+		</Card>
+		<Card>
+			<div class="header-container">
+				<Icon type='lucide' name="briefcase-business" width={24} height={24} class='glow-icon' />
+				<h2>Work Experience</h2>
+			</div>
+			<div class="work-experience-container">
+				{workExperience.reverse().map((entry) => (
+					<div class="work-experience-entry">
+						<span class="work-experience-duration">{entry.data.duration}</span>
+						<h3 class="work-experience-company">{entry.data.company}</h3>
+						<span class="work-experience-role">{entry.data.title}</span>
+						<p class="work-experience-desc">{entry.data.description}</p>
+					</div>
+				))}
+			</div>
+		</Card>
+	</div>
+</Layout>
+
+
+<div slot="left" class="galery-full-width">
+
+	{/* Contenu principal dans le slot par défaut (ou left/right selon ton layout) */}
+	{/* Pour un layout pleine largeur, on utilise souvent un slot unique ou on adapte le Layout */}
+	<div class="galeries-stack">
+		{highlights.sort((a, b) => a.data.id - b.data.id).map((galery) => (
+			<div class="galery-wrapper">
+				{/* 1. Titre et Description au-dessus */}
+				<div class="galery-header-info">
+					<div class="title-row">
+						<Icon type={galery.data.icon.type} name={galery.data.icon.name as any} width={28} height={28} class="glow-icon" />
+						<h2>{galery.data.title}</h2>
+					</div>
+					<p class="desc">{galery.data.description}</p>
+				</div>
+
+				{/* 2. Carte transparente avec le carrousel */}
+				<Card class="transparent-card">
+
+					{/* NOUVEAU CONTENEUR RELATIF */}
+					<div class="carousel-container">
+
+						{/* Bouton Gauche (en dehors de track) */}
+						<button class="nav-btn prev-btn" aria-label="Image précédente">
+							<Icon type="lucide" name="chevron-left" width={32} height={32} />
+						</button>
+
+						{/* La piste qui contient UNIQUEMENT les images */}
+						<div class="carousel-track">
+							{galery.data.images.map((imgSrc) => (
+								<img
+									src={imgSrc}
+									alt={`Rendu ${galery.data.title}`}
+									loading="lazy"
+									class="carousel-img"
+								/>
+							))}
+						</div>
+
+						{/* Bouton Droite (en dehors de track) */}
+						<button class="nav-btn next-btn" aria-label="Image suivante">
+							<Icon type="lucide" name="chevron-right" width={32} height={32}/>
+						</button>
+
+					</div>
+
+				</Card>
+			</div>
+		))}
+	</div>
+</div>
+
+
+<script>
+	// On cible tous les détails de la page
+	const allDetails = document.querySelectorAll('details');
+
+	allDetails.forEach((detail) => {
+		const summary = detail.querySelector('summary');
+		// On cible ta liste à l'intérieur
+		const content = detail.querySelector('.softwares-list');
+
+		if (!summary || !content) return;
+
+		summary.addEventListener('click', (e) => {
+			e.preventDefault(); // 1. On empêche l'ouverture/fermeture brutale immédiate
+
+			if (detail.open) {
+				// --- CAS FERMETURE ---
+				// On anime vers 0px
+				const animation = content.animate(
+					[
+						{ height: content.scrollHeight + 'px', opacity: 1, transform: 'translateY(0)' },
+						{ height: '0px', opacity: 0, transform: 'translateY(-4px)' }
+					],
+					{ duration: 250, easing: 'ease-out' }
+				);
+
+				// Une fois l'animation finie, on retire l'attribut open
+				animation.onfinish = () => {
+					detail.removeAttribute('open');
+				};
+			} else {
+				// --- CAS OUVERTURE ---
+				// On ajoute l'attribut d'abord pour que le contenu existe
+				detail.setAttribute('open', 'true');
+
+				// Puis on anime de 0 à la taille réelle
+				content.animate(
+					[
+						{ height: '0px', opacity: 0, transform: 'translateY(-4px)' },
+						{ height: content.scrollHeight + 'px', opacity: 1, transform: 'translateY(0)' }
+					],
+					{ duration: 250, easing: 'ease-out' }
+				);
+			}
+		});
+	});
+
+	// Script pour gérer le défilement
+	document.querySelectorAll('.carousel-container').forEach(container => {
+		const track = container.querySelector('.carousel-track');
+		const prevBtn = container.querySelector('.prev-btn');
+		const nextBtn = container.querySelector('.next-btn');
+
+		if (!track || !prevBtn || !nextBtn) return;
+
+		const scrollAmount = 400; // Quantité de scroll en px
+
+		prevBtn.addEventListener('click', () => {
+			track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+		});
+
+		nextBtn.addEventListener('click', () => {
+			track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+		});
+	});
+</script>

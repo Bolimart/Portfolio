@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "icon": {
+      "type": "simple-icons",
+      "name": "github"
+    },
+    "text": "GitHub",
+    "link": "https://github.com/Bolimart"
+  },
+  {
+    "id": 2,
+    "icon": {
+      "type": "simple-icons",
+      "name": "itchdotio"
+    },
+    "text": "Itch.io",
+    "link": "https://bolimart.itch.io/"
+  },
+  {
+    "id": 3,
+    "icon": {
+      "type": "simple-icons",
+      "name": "discord"
+    },
+    "text": "Discord: bolimart.portable"
+  },
+  {
+  "id": 4,
+  "icon": {
+    "type": "lucide",
+    "name": "mail"
+  },
+  "text": "Mail: julien.fortineau74@gmail.com",
+  "link": "mailto:julien.fortineau74@gmail.com"
+},
+  {
+  "id": 5,
+  "icon": {
+    "type": "lucide",
+    "name": "phone"
+  },
+  "text": "Téléphone: 0749948424"
+}
+]

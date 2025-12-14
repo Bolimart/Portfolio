@@ -1,0 +1,42 @@
+
+[
+  {
+    "title": "Stud.io",
+    "icon": {
+      "type": "lucide",
+      "name": "toy-brick"
+    },
+    "description": "Fanarts du jeu Rain World rendu et réalisés sur le logiciel Stud.io de Bricklink.",
+    "id": 1,
+    "images": [
+      "/img/galerie/studdotio/studio-1.png",
+      "/img/galerie/studdotio/studio-2.png",
+      "/img/galerie/studdotio/studio-3.png",
+      "/img/galerie/studdotio/studio-4.png",
+      "/img/galerie/studdotio/studio-5.png",
+      "/img/galerie/studdotio/studio-6.png",
+      "/img/galerie/studdotio/studio-7.png",
+      "/img/galerie/studdotio/studio-8.png",
+      "/img/galerie/studdotio/studio-9.png",
+      "/img/galerie/studdotio/studio-10.png",
+      "/img/galerie/studdotio/studio-11.png",
+      "/img/galerie/studdotio/studio-12.png",
+      "/img/galerie/studdotio/studio-13.png"
+    ]
+  },
+  {
+    "title": "Pixel Composer",
+    "icon": {
+      "type": "lucide",
+      "name": "toy-brick"
+    },
+    "description": "Sprites et rendus fait avec Pixel Composer, un puissant logiciel qui permet de créer de sprite 2D de manière nodale.",
+    "id": 2,
+    "images": [
+      "/img/galerie/pixelComposer/pc-1.png",
+      "/img/galerie/pixelComposer/CardFlipTest.gif",
+      "/img/galerie/pixelComposer/DeathIsAnOpportunityLogo.png",
+      "/img/galerie/pixelComposer/Starfield 1.png"
+    ]
+  }
+]

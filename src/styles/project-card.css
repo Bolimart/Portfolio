@@ -1,0 +1,48 @@
+.post-container.with-thumbnail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; /* Important: ancre l'image en haut */
+    gap: 1.5rem; /* Espace entre le texte et l'image */
+    padding: 1rem; /* Un peu d'air autour si besoin */
+}
+
+.post-content {
+    flex: 1; /* Le texte prend toute la place restante */
+    min-width: 0; /* Évite que le texte ne force la largeur */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.post-description {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.post-thumbnail {
+    flex-shrink: 0; /* Empêche l'image de rétrécir */
+    width: 280px; /* Largeur fixe demandée */
+}
+
+.project-thumb-img {
+    width: 100%;
+    height: auto; /* Garde le ratio */
+    /* Si tu veux une hauteur fixe (ex: 160px) avec crop : */
+    /* height: 160px;
+    object-fit: cover; */
+    border-radius: 8px;
+    display: block;
+}
+
+/* Responsive : sur mobile, on empile */
+@media (max-width: 768px) {
+    .post-container.with-thumbnail {
+        flex-direction: column-reverse; /* Image au-dessus ou en dessous ? Ici texte en bas, image en haut */
+        align-items: stretch;
+    }
+
+    .post-thumbnail {
+        width: 100%; /* Pleine largeur sur mobile */
+    }
+}

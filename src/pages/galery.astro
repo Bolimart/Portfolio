@@ -1,0 +1,100 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Card from '../components/Card.astro'
+import Icon from '../components/Icon.astro'
+import Image from 'astro:assets'
+import { getCollection } from 'astro:content'
+import "../styles/galery.css"
+
+const allGaleries = await getCollection('galeries');
+---
+
+<Layout
+    title={"Galerie"}
+    description={"Vue d'ensemble des captures et rendu des projets réalisés."}
+    pagefindIgnore
+>
+  <div class="galery-title" slot="404">
+    <h1 class="text-glow">Galerie</h1>
+    <p>Vue d'ensemble des captures et rendu des projets réalisés.</p>
+    <p class="block-link">↓ Srollez pour voir plus ↓</p>
+  </div>
+</Layout>
+
+<div slot="left" class="galery-full-width">
+
+  {/* Contenu principal dans le slot par défaut (ou left/right selon ton layout) */}
+  {/* Pour un layout pleine largeur, on utilise souvent un slot unique ou on adapte le Layout */}
+  <div class="galeries-stack">
+    {allGaleries.sort((a, b) => a.data.id - b.data.id).map((galery) => (
+        <div class="galery-wrapper">
+          {/* 1. Titre et Description au-dessus */}
+          <div class="galery-header-info">
+            <div class="title-row">
+              <Icon type={galery.data.icon.type} name={galery.data.icon.name as any} width={28} height={28} class="glow-icon" />
+              <h2>{galery.data.title}</h2>
+            </div>
+            <p class="desc">{galery.data.description}</p>
+          </div>
+
+          {/* 2. Carte transparente avec le carrousel */}
+          <Card class="transparent-card">
+
+            {/* NOUVEAU CONTENEUR RELATIF */}
+            <div class="carousel-container">
+
+              {/* Bouton Gauche (en dehors de track) */}
+              <button class="nav-btn prev-btn" aria-label="Image précédente">
+                <Icon type="lucide" name="chevron-left" width={32} height={32} />
+              </button>
+
+              {/* La piste qui contient UNIQUEMENT les images */}
+              <div class="carousel-track">
+                {galery.data.images.map((imgSrc) => (
+                    <img
+                        src={imgSrc}
+                        alt={`Rendu ${galery.data.title}`}
+                        loading="lazy"
+                        class="carousel-img"
+                        width="auto"
+                        height="auto"
+                    />
+                ))}
+              </div>
+
+              {/* Bouton Droite (en dehors de track) */}
+              <button class="nav-btn next-btn" aria-label="Image suivante">
+                <Icon type="lucide" name="chevron-right" width={32} height={32}/>
+              </button>
+
+            </div>
+
+          </Card>
+        </div>
+    ))}
+  </div>
+</div>
+
+
+<script>
+  // Script pour gérer le défilement
+  document.querySelectorAll('.carousel-container').forEach(container => {
+    const track = container.querySelector('.carousel-track');
+    const prevBtn = container.querySelector('.prev-btn');
+    const nextBtn = container.querySelector('.next-btn');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const scrollAmount = 400; // Quantité de scroll en px
+
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  });
+</script>
+
+
