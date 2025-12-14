@@ -3,7 +3,7 @@
     "title": "Highlights",
     "icon": {
       "type": "lucide",
-      "name": "spotlight"
+      "name": "highlighter"
     },
     "description": "Voici quelques captures et rendus de mon travail.",
     "id": 1,
