@@ -123,7 +123,7 @@ const { Content: About } = await render(about!);
 						.sort((a, b) => a.data.id - b.data.id)
 						.slice(0, 2)
 						.map((project) => (
-							<a href={`/projects/${project.id}`} class="post-container with-thumbnail">
+							<a href={`/Portfolio/projects/${project.id}`} class="post-container with-thumbnail">
 								<div class="post-content">
 									<div class="post-header">
 										<h3>{project.data.title}</h3>
@@ -199,7 +199,7 @@ const { Content: About } = await render(about!);
 						<div class="carousel-track">
 							{galery.data.images.map((imgSrc) => (
 								<img
-									src={imgSrc}
+									src={'/Portfolio/' + imgSrc}
 									alt={`Rendu ${galery.data.title}`}
 									loading="lazy"
 									class="carousel-img"

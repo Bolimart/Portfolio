@@ -5,14 +5,14 @@ import { name } from 'spectre:globals';
 const path = Astro.url.pathname;
 ---
 <nav>
-  <a class="site-title" href="/">{name}</a>
+  <a class="site-title" href="/Portfolio">{name}</a>
   <ul>
     <li>
-      <a href="/projects" class:list={{ active: path.startsWith('/projects') }}>Projets</a>
+      <a href="/Portfolio/projects" class:list={{ active: path.startsWith('/Portfolio/projects') }}>Projets</a>
     </li>
     <li class="nav-separator">/</li>
     <li>
-      <a href="/galery" class:list={{ active: path.startsWith('/galery') }}>Galerie</a>
+      <a href="/Portfolio/galery" class:list={{ active: path.startsWith('/Portfolio/galery') }}>Galerie</a>
     </li>
   </ul>
   <button class="mobile-nav-toggle" aria-label="Mobile menu trigger">

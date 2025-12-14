@@ -52,7 +52,7 @@ const allGaleries = await getCollection('galeries');
               <div class="carousel-track">
                 {galery.data.images.map((imgSrc) => (
                     <img
-                        src={imgSrc}
+                        src={'/Portfolio/' + imgSrc}
                         alt={`Rendu ${galery.data.title}`}
                         loading="lazy"
                         class="carousel-img"

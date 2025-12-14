@@ -23,11 +23,9 @@ const {
 
 // https://astro.build/config
 const config = defineConfig({
-  site: 'https://bolimart.github.io/PortfolioCnam',
+  site: 'https://bolimart.github.io',
+  base: 'Portfolio',
   output: 'static',
-  build: {
-    outDir: 'dist', // Répertoire de sortie
-  },
   integrations: [
     expressiveCode({
       themes: [spectreDark],
